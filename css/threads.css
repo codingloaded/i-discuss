@@ -1,0 +1,14 @@
+*{
+    padding: 0;
+    margin: 0;
+}.question{
+    display: flex;
+    /* border: 1px solid blue; */
+    gap: 10px;
+}
+.question img{
+    height: 25px;
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid black;
+}
