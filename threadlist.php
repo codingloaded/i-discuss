@@ -53,7 +53,7 @@
                echo '<div class="question">
                     <img src="partials/user.png" alt="">
                     <div>
-                        <h6><a class = "text-dark" href = "threads.php">'.$threads_name.'</a></h6>
+                        <h6><a class = "text-dark" href = "thread.php?tid='.$threads_id.'">'.$threads_name.'</a></h6>
                         <p>'.$threads_desc.'</p>
                     </div>
                 </div>';

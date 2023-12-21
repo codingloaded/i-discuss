@@ -66,7 +66,7 @@
                               <div class="card-body">
                                   <h5 class="card-title">'.$name.'</h5>
                                   <p class="card-text">'.substr($des, 0,50).'...</p>
-                                  <a href="threads.php?catid='.$id.'" class="btn btn-sm btn-primary">See thread</a>
+                                  <a href="threadlist.php?catid='.$id.'" class="btn btn-sm btn-primary">See thread</a>
                               </div>
                           </div>
                       </div> ';
