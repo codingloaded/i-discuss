@@ -1,14 +1,22 @@
 *{
     padding: 0;
     margin: 0;
-}.question{
+}
+.question{
     display: flex;
     /* border: 1px solid blue; */
     gap: 10px;
+    background: rgba(128, 128, 128, 0.2) ;
+    padding: 15px 15px;
+    border-radius: 10px;
 }
 .question img{
     height: 25px;
     border-radius: 50%;
     padding: 3px;
     border: 1px solid black;
+}
+.center{
+    justify-content: center;
+    align-items: center;
 }
