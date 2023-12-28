@@ -19,10 +19,29 @@
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
                 $catname =  $row["category_name"];
-                $catid =  $row["category_id"];
+                
                 $catdes =  $row["category_description"];
             }
     ?>
+
+    <?php
+    $showAlert = false;
+    $method = $_SERVER["REQUEST_METHOD"];
+    if($method == "POST"){
+        $threads_name = $_POST["threads_name"];
+        $threads_desc = $_POST["threads_desc"];
+        $sql = "INSERT INTO `threads` (`threads_name`, `threads_desc`, `threads_cat_id`, `threads_user_id`, `time`) VALUES ('$threads_name', '$threads_desc', '$id', '0', current_timestamp())";
+        $result = mysqli_query($conn, $sql);
+        $showAlert = true;
+        if($showAlert){
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Your querry is successfully registerd</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
+    ?>
+
 
     <div class="container my-3">
         <div class="alert alert-success" role="alert">
@@ -38,7 +57,8 @@
 
     <div class="container">
         <h3 class="text-center">Ask a question</h3>
-        <form action=" ">
+        <form action="<?php $_SERVER['REQUEST_URI']?>" method="post">
+            <!-- Here 46 $id can not be used as for is in html so request_uri has been used  -->
             <div class="form-group my-3">
                 <div class="mb-3">
                     <label for="threads_name" class="form-label">Question</label>
@@ -98,3 +118,4 @@
 </body>
 
 </html>
+<!-- in line 46 $id can not be used as for is in html so request_uri has been used  -->

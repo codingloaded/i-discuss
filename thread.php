@@ -15,11 +15,11 @@
     <?php include 'partials/_dbconnect.php'; ?>
     <?php
      $id = $_GET['tid'];
-     $sql =  $sql = "SELECT * FROM `threads` WHERE `threads_cat_id` = $id";
+     $sql =  $sql = "SELECT * FROM `threads` WHERE `threads_id` = $id";
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
                 $threads_name =  $row["threads_name"];
-                $threads_id = $row["threads_id"];
+                $threads_cat_id = $row["threads_cat_id"];
                 $threads_desc =  $row["threads_desc"];
             }
     ?>
@@ -39,13 +39,14 @@
     <div class="container my-3">
         <h3 class="my-3 text-center">Discussion</h3>
 
-        <?php
+        <!-- its demo php will be deleted later  -->
+        <!-- <?php
             $id = $_GET['tid'];
-            $sql = "SELECT * FROM `threads` WHERE `threads_cat_id` = $id";
+            $sql = "SELECT * FROM `threads` WHERE `threads_id` = $id";
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
                 $threads_name =  $row["threads_name"];
-                $threads_id = $row["threads_id"];
+                $threads_cat_id = $row["threads_cat_id"];
                 $threads_desc =  $row["threads_desc"];
            
     
@@ -58,15 +59,8 @@
                     </div>
                 </div>';
             }
-        ?>
-        <!-- will delete later  -->
-        <div class="question">
-            <img src="partials/user.png" alt="">
-            <div>
-                <h6>Media Heading</h6>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit, aliquam.</p>
-            </div>
-        </div>
+        ?> -->
+    
         
 
 
