@@ -71,7 +71,7 @@
              echo '<div class="question">
              <img src="partials/user.png" alt="">
              <div>
-                 <h6> Posted by:- Anirban Ghosal </h6>
+                 <h6> Answered by:- Anirban Ghosal </h6>
                  <p>'.$comment_content.'</p>
              </div>
          </div>';;

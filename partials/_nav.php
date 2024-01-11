@@ -45,6 +45,13 @@ echo '
 include 'partials/_loginmodal.php';
 include 'partials/_signupmodal.php';
 
+if(isset($_GET['signup']) && $_GET['signup']=="true"){
+  echo '<div class="alert alert-success alert-dismissible fade show my-0" role="alert">
+  <strong>Hello!</strong> You are registered, Now you can login.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>';
+}
+
 
 
 ?>

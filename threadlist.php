@@ -87,11 +87,13 @@
                 $threads_name =  $row["threads_name"];
                 $threads_id = $row["threads_id"];
                 $threads_desc =  $row["threads_desc"];
+                $threads_time =  $row["time"];
                 $noResult = false;
            
              echo '<div class="question">
                     <img src="partials/user.png" alt="">
                     <div>
+                         <p class = "mb-0"> Asked by <b>Anonymas user</b> at <b> '.$threads_time.'</b></p>
                         <h6><a class = "text-primary" href = "thread.php?tid='.$threads_id.'">'.$threads_name.'</a></h6>
                         <p>'.$threads_desc.'</p>
                     </div>
