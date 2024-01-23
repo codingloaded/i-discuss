@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         if(password_verify($password, $row['password'])){
             $showAlert = true;
             session_start();
-            $_SESSION['loggidin'] = true;
+            $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
             header("Location:/roni/forum/index.php?login=true");
         }else{
