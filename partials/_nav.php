@@ -39,7 +39,7 @@ echo '
       <div class="mx-2 d-flex align-items-center justify-content-between ">';
       if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
         echo '<p class = "text-white my-0 mx-1 ">  Welcome '.$_SESSION['username'].'</p>
-        <button type="button" class="btn btn-primary mx-1">Primary</button>';
+        <a href="partials/_logout.php" type="button" class="btn btn-primary mx-1">Logout</a>';
 
       }else{
         echo'<button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#loginModalLabel">Login</button>
