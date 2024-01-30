@@ -33,8 +33,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 $result = mysqli_query($conn, $sql);
                 if($result){
                     $showAlert = true;
-                    header("Location:/roni/forum/index.php?signup=true");
-                    // header("Location:/roni/forum/myaccount.php?name=${username}");
+                    session_start();
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['username'] = $username;
+                    // header("Location:/roni/forum/index.php?signup=true");
+                    header("Location:/roni/forum/myaccount.php");
                 }
             }else{
                 $showError = "Password do not matched!!!";
