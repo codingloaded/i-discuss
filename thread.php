@@ -37,21 +37,33 @@
         </div>
     </div>
 
-    <div class="container">
-        <h3 class="text-center">Post your answer</h3>
-        <form action="<?php $_SERVER['REQUEST_URI']?>" method="post">
-            <!-- Here 46 $id can not be used as for is in html so request_uri has been used  -->
-            <div class="form-group my-3">
-                
-                <div class="mb-3">
-                    <label for="comment_content" class="form-label">Write your answer</label>
-                    <textarea class="form-control" id="comment_content" name="comment_content" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+    <?php
+if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
+    echo'      <div class="container">
+    <h3 class="text-center">Post your answer</h3>
+    <form action="'. $_SERVER['REQUEST_URI'].'" method="post">
+        <!-- Here 46 $id can not be used as for is in html so request_uri has been used  -->
+        <div class="form-group my-3">
+            
+            <div class="mb-3">
+                <label for="comment_content" class="form-label">Write your answer</label>
+                <textarea class="form-control" id="comment_content" name="comment_content" rows="3"></textarea>
             </div>
-        </form>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 
-    </div>
+</div>';   
+}
+else{
+ echo' <div class="container d-flex flex-column align-items-center justify-content-center">
+ <h3 class="text-center">Ask a question</h3>
+ <div>Please <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModalLabel">Login</button> to ask any question</div>
+ <div>If you do not have a account then please <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button> to create an account</div>
+ </div>';
+}
+
+?>
 
 
     <div class="container my-3">
