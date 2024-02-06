@@ -19,6 +19,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $showAlert = true;
             session_start();
             $_SESSION['loggedin'] = true;
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $username;
             header("Location:/roni/forum/index.php?login=true");
         }else{

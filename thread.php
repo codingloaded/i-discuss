@@ -15,7 +15,7 @@
     <?php include 'partials/_dbconnect.php'; ?>
     <?php
      $tid = $_GET['tid'];
-     echo $tid;
+    
      $sql =  $sql = "SELECT * FROM `threads` WHERE `threads_id` = $tid";
             $result = mysqli_query($conn, $sql);
             while($row = mysqli_fetch_assoc($result)){
@@ -23,6 +23,24 @@
                 $threads_cat_id = $row["threads_cat_id"];
                 $threads_desc =  $row["threads_desc"];
             }
+    ?>
+
+<?php
+    $showAlert = false;
+    $method = $_SERVER["REQUEST_METHOD"];
+    if($method == "POST"){
+        $comment_content = $_POST["comment_content"];
+        $user_id = $_POST["user_id"];
+        $sql = "INSERT INTO `comments` (`thread_id`, `comment_content`, `comment_date_time`, `user_id`) VALUES ('$tid', '$comment_content', current_timestamp(), '$user_id')";
+        $result = mysqli_query($conn, $sql);
+        $showAlert = true;
+        if($showAlert){
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Your answer is submitted</strong> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>';
+        }
+    }
     ?>
 
     <div class="container my-3">
@@ -39,6 +57,7 @@
 
     <?php
 if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
+    $userid= $_SESSION["user_id"];
     echo'      <div class="container">
     <h3 class="text-center">Post your answer</h3>
     <form action="'. $_SERVER['REQUEST_URI'].'" method="post">
@@ -49,6 +68,7 @@ if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
                 <label for="comment_content" class="form-label">Write your answer</label>
                 <textarea class="form-control" id="comment_content" name="comment_content" rows="3"></textarea>
             </div>
+             <input type="hidden" name="user_id" value="'.$userid.'" readonly>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
@@ -79,11 +99,15 @@ else{
                 $comment_id = $row["comment_id"];
                 $user_id =  $row["user_id"];
                 $noResult = false;
+                $sql2 ="SELECT * FROM `users` WHERE `user_id` = $user_id";
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $username = $row2['user_name'];
            
              echo '<div class="question">
              <img src="partials/user.png" alt="">
              <div>
-                 <h6> Answered by:- Anirban Ghosal </h6>
+                 <h6> Answered by:- '.$username.' </h6>
                  <p>'.$comment_content.'</p>
              </div>
          </div>';;

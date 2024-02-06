@@ -30,7 +30,8 @@
     if($method == "POST"){
         $threads_name = $_POST["threads_name"];
         $threads_desc = $_POST["threads_desc"];
-        $sql = "INSERT INTO `threads` (`threads_name`, `threads_desc`, `threads_cat_id`, `threads_user_id`, `time`) VALUES ('$threads_name', '$threads_desc', '$id', '0', current_timestamp())";
+        $threads_user_id = $_POST["user_id"];
+        $sql = "INSERT INTO `threads` (`threads_name`, `threads_desc`, `threads_cat_id`, `threads_user_id`, `time`) VALUES ('$threads_name', '$threads_desc', '$id', '$threads_user_id ', current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
         if($showAlert){
@@ -58,6 +59,7 @@
 <!--  Question form     -->
 <?php
 if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
+    $userid= $_SESSION["user_id"];
     echo'   <div class="container">
     <h3 class="text-center">Ask a question</h3>
     <form action="'. $_SERVER["REQUEST_URI"].'" method="post">
@@ -72,6 +74,7 @@ if(isset($_SESSION['loggedin'])&&$_SESSION['loggedin']==true){
                 <label for="threads_desc" class="form-label">Elaborate your question</label>
                 <textarea class="form-control" id="threads_desc" name="threads_desc" rows="3"></textarea>
             </div>
+            <input type="hidden" name="user_id" value="'.$userid.'" readonly>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
@@ -101,14 +104,21 @@ else{
                 $threads_id = $row["threads_id"];
                 $threads_desc =  $row["threads_desc"];
                 $threads_time =  $row["time"];
+                $threads_user_id = $row["threads_user_id"];
                 $noResult = false;
+                $sql2 ="SELECT * FROM `users` WHERE `user_id` = $threads_user_id";
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $username = $row2['user_name'];
+                
            
              echo '<div class="question">
                     <img src="partials/user.png" alt="">
                     <div>
-                         <p class = "mb-0"> Asked by <b>Anonymas user</b> at <b> '.$threads_time.'</b></p>
+                        
                         <h6><a class = "text-primary" href = "thread.php?tid='.$threads_id.'">'.$threads_name.'</a></h6>
                         <p>'.$threads_desc.'</p>
+                        <p class = "mb-0"> :-<i> Asked by <b>'.$username.'</b> at <b> '.$threads_time.'</b></i></p>
                     </div>
                 </div>';
             }
