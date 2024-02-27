@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <?php include 'partials/_nav.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
+    <?php include 'partials/_nav.php'; ?>
     <?php
      $tid = $_GET['tid'];
     
@@ -22,6 +22,11 @@
                 $threads_name =  $row["threads_name"];
                 $threads_cat_id = $row["threads_cat_id"];
                 $threads_desc =  $row["threads_desc"];
+                $threads_user_id =  $row["threads_user_id"];
+                $sql2 ="SELECT * FROM `users` WHERE `user_id` = $threads_user_id";
+                $result2 = mysqli_query($conn, $sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $tusername = $row2['user_name'];
             }
     ?>
 
@@ -30,7 +35,11 @@
     $method = $_SERVER["REQUEST_METHOD"];
     if($method == "POST"){
         $comment_content = $_POST["comment_content"];
+        // changed content for xss 
+        $comment_content = str_replace("<", "&lt;","$comment_content");
+        $comment_content = str_replace(">","&gt;", "$comment_content");
         $user_id = $_POST["user_id"];
+        //running querry
         $sql = "INSERT INTO `comments` (`thread_id`, `comment_content`, `comment_date_time`, `user_id`) VALUES ('$tid', '$comment_content', current_timestamp(), '$user_id')";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
@@ -51,7 +60,7 @@
             <p>This is a peer to peer forum. No Spam / Advertising / Self-promote in the forums is not allowed. Do not
                 post copyright-infringing material. Do not post “offensive” posts, links or images. Do not cross post
                 questions. Remain respectful of other members at all times.</p>
-            <span>Posted by :- </span><button class="btn btn-primary">Anirban Ghosal</button>
+            <span>Posted by :- </span><button class="btn btn-primary"><?php echo"$tusername"; ?></button>
         </div>
     </div>
 

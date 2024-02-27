@@ -19,8 +19,8 @@ if(!isset($_SESSION['loggedin'])|| ($_SESSION['loggedin']!=true)){
 </head>
 
 <body>
-    <?php include 'partials/_nav.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
+    <?php include 'partials/_nav.php'; ?>
     
     <?php
     $user_name = $_SESSION['username'];

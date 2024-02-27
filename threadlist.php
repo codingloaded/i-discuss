@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <?php include 'partials/_nav.php'; ?>
     <?php include 'partials/_dbconnect.php'; ?>
+    <?php include 'partials/_nav.php'; ?>
     <?php
      $id = $_GET['catid'];
      $sql = "SELECT * FROM `category` WHERE category_id = $id";
@@ -30,7 +30,15 @@
     if($method == "POST"){
         $threads_name = $_POST["threads_name"];
         $threads_desc = $_POST["threads_desc"];
+        //changed threads_name for xss
+        $threads_name = str_replace("<", "&lt;","$threads_name");
+        $threads_name = str_replace(">","&gt;", "$threads_name");
+        //changed treads_desc for xss
+        $threads_desc = str_replace("<", "&lt;","$threads_desc");
+        $threads_desc = str_replace(">","&gt;", "$threads_desc");
+        
         $threads_user_id = $_POST["user_id"];
+        //running querry
         $sql = "INSERT INTO `threads` (`threads_name`, `threads_desc`, `threads_cat_id`, `threads_user_id`, `time`) VALUES ('$threads_name', '$threads_desc', '$id', '$threads_user_id ', current_timestamp())";
         $result = mysqli_query($conn, $sql);
         $showAlert = true;
